@@ -33,7 +33,7 @@ public partial class WorkerViewModel : ObservableObject
             });
         }
     }
-    
+
     public string LastName
     {
         get => Model.LastName;
@@ -46,13 +46,13 @@ public partial class WorkerViewModel : ObservableObject
             });
         }
     }
-    
+
     public int HourTimeWorking
     {
         get => Model.HourTimeWorking;
         set
         {
-            SetProperty(Model.HourTimeWorking, value, Model, 
+            SetProperty(Model.HourTimeWorking, value, Model,
                 (originModel, newValue) => originModel.HourTimeWorking = newValue);
         }
     }
@@ -60,14 +60,14 @@ public partial class WorkerViewModel : ObservableObject
     public DateTime Birthday
     {
         get => Model.BirthDay;
-        set => SetProperty(Model.BirthDay, value, Model, 
+        set => SetProperty(Model.BirthDay, value, Model,
             (originModel, newValue) => originModel.BirthDay = newValue);
     }
-    
+
     public string? Description
     {
         get => Model.Description;
-        set => SetProperty(Model.Description, value, Model, 
+        set => SetProperty(Model.Description, value, Model,
             (originModel, newValue) => originModel.Description = newValue);
     }
 

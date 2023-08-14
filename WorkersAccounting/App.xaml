@@ -1,9 +1,8 @@
 ﻿<Application x:Class="WorkersAccounting.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:WorkersAccounting"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         <ResourceDictionary Source="Resourses/TestData/Workers.xaml"/>
+        <ResourceDictionary Source="Resourses/TestData/Workers.xaml" />
     </Application.Resources>
 </Application>

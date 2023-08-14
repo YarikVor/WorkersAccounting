@@ -30,7 +30,7 @@ public partial class MainViewModel : ObservableObject
         : this(new ObservableCollection<WorkerViewModel>(workers))
     {
     }
-    
+
     public MainViewModel(IEnumerable<Worker> workers)
         : this(workers.Select(w => new WorkerViewModel(w)))
     {
@@ -58,7 +58,7 @@ public partial class MainViewModel : ObservableObject
 
     private static Worker GenerateTemplateWorker()
     {
-        return new Worker()
+        return new Worker
         {
             FirstName = "FirstName",
             HourTimeWorking = 0,
@@ -67,6 +67,4 @@ public partial class MainViewModel : ObservableObject
             LastName = "LastName"
         };
     }
-    
-    
 }
