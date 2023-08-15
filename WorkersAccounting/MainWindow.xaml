@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:WorkersAccounting.ViewModels"
-        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         x:Name="Root"
         Title="WorkersAccounting" Height="450" Width="800">
@@ -16,75 +15,19 @@
         </ObjectDataProvider>
     </Window.DataContext>
     <DockPanel Margin="4">
-        <DockPanel DockPanel.Dock="Left">
-            <ToolBar DockPanel.Dock="Bottom">
-                <Button Content="Create" Command="{Binding CreateCommand}" />
-                <Button Content="Delete" Command="{Binding RemoveCommand}"
-                        CommandParameter="{Binding ElementName=ListBoxModels, Path=SelectedValue}" />
-            </ToolBar>
-            <ListBox x:Name="ListBoxModels" ItemsSource="{Binding Path=Models}" DisplayMemberPath="FullName"
-                     SelectedValue="{Binding Path=SelectedModel}" />
-        </DockPanel>
-        <DockPanel Margin="8 0 0 0" DataContext="{Binding Path=SelectedModel}">
-            <Button DockPanel.Dock="Bottom" Content="Save" Command="{Binding Path=SaveCommand}" />
-
-            <StackPanel>
-                <StackPanel.Resources>
-                    <Style TargetType="Grid">
-                        <Setter Property="Margin" Value="0 0 0 4" />
-                    </Style>
-                </StackPanel.Resources>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="First Name" />
-                    <TextBox Grid.Column="1" Text="{Binding Path=FirstName}" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Last Name" />
-                    <TextBox Grid.Column="1" Text="{Binding Path=LastName}" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Birthday" />
-                    <DatePicker Grid.Column="1"
-                                SelectedDate="{Binding Path=Birthday}"
-                                SelectedDateFormat="Short"
-                                DisplayDateEnd="{x:Static Member=system:DateTime.Today}" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Time Working (Hour)" />
-                    <TextBox Grid.Column="1" Text="{Binding Path=HourTimeWorking}" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Description" />
-                    <TextBox Grid.Column="1"
-                             VerticalScrollBarVisibility="Auto"
-                             AcceptsReturn="True"
-                             TextWrapping="Wrap"
-                             AcceptsTab="True"
-                             MinLines="5"
-                             MaxLines="5"
-                             Text="{Binding Path=Description}" />
-                </Grid>
-            </StackPanel>
-        </DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Create" Command="{Binding CreateCommand}" />
+            <MenuItem Header="Delete" Command="{Binding RemoveCommand}" />
+        </Menu>
+        <DataGrid ItemsSource="{Binding Path=Models}" AutoGenerateColumns="False"
+                  SelectedItem="{Binding Path=SelectedModel}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="First name" Binding="{Binding Path=FirstName}" />
+                <DataGridTextColumn Header="Last name" Binding="{Binding Path=LastName}" />
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Path=Birthday, StringFormat='yyyy/MM/dd'}" />
+                <DataGridTextColumn Header="Time working (h)" Binding="{Binding Path=HourTimeWorking}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Path=Description}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
     </DockPanel>
 </Window>
