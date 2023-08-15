@@ -61,7 +61,7 @@ public partial class MainViewModel : ObservableObject
     {
         var worker = GenerateTemplateWorker();
         var viewModel = new WorkerViewModel(worker);
-        Add(viewModel);
+        Models.Add(viewModel);
     }
 
     private static Worker GenerateTemplateWorker()
