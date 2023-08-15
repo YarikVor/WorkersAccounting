@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WorkersAccounting.Entities;
@@ -14,7 +15,7 @@ public partial class MainViewModel : ObservableObject
     private ObservableCollection<WorkerViewModel> _models;
 
     [ObservableProperty]
-    private WorkerViewModel _selectedModel;
+    private WorkerViewModel? _selectedModel;
 
     public MainViewModel(ObservableCollection<WorkerViewModel> models)
     {
@@ -37,15 +38,22 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void Remove(WorkerViewModel model)
+    public void Remove()
     {
-        Models.Remove(model);
-    }
+        if (SelectedModel == null)
+            return;
 
-    [RelayCommand]
-    public void Add(WorkerViewModel model)
-    {
-        Models.Add(model);
+        var messageResult = MessageBox.Show(
+            $"Do you want delete {SelectedModel.FirstName} {SelectedModel.LastName}?",
+            "Delete item",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Stop);
+
+        if (messageResult == MessageBoxResult.Yes)
+        {
+            Models.Remove(SelectedModel);
+            SelectedModel = null;
+        }
     }
 
     [RelayCommand]
