@@ -19,18 +19,13 @@ public partial class WorkerViewModel : ObservableObject
         _model = model;
     }
 
-    public string FullName => $"{_model.FirstName} {_model.LastName}";
-
     public string FirstName
     {
         get => Model.FirstName;
         set
         {
-            SetProperty(Model.FirstName, value, Model, (originModel, newValue) =>
-            {
-                originModel.FirstName = newValue;
-                OnPropertyChanged(nameof(FullName));
-            });
+            SetProperty(Model.FirstName, value, Model,
+                (originModel, newValue) => { originModel.FirstName = newValue; });
         }
     }
 
@@ -39,11 +34,7 @@ public partial class WorkerViewModel : ObservableObject
         get => Model.LastName;
         set
         {
-            SetProperty(Model.LastName, value, Model, (originModel, newValue) =>
-            {
-                originModel.LastName = newValue;
-                OnPropertyChanged(nameof(FullName));
-            });
+            SetProperty(Model.LastName, value, Model, (originModel, newValue) => { originModel.LastName = newValue; });
         }
     }
 
